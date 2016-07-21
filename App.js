@@ -10,6 +10,10 @@ class App extends React.Component {
   }
 }
 
+App.propTypes = {
+  user: React.PropTypes.string.isRequired
+}
+
 ReactDOM.render(
   <App user="Amr" />,
   document.getElementById('app')
