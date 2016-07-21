@@ -7,39 +7,49 @@ class App extends React.Component {
   // create a state
   constructor() {
     super();
-    this.state = {
-      count: "0"
-    }
+
+    this.state = {number: 0};
   }
 
-  increment(e) {
-    this.setState({
-      count: parseInt(this.state.count) + 1
-    });
+  mount() {
+    //console.log("mounting");
+  }
+
+  unmount() {
+    ReactDOM.unmountComponentAtNode(this.refs.txt);
+  }
+
+  countOn() {
+    this.setState({number: this.state.number+3})
+  }
+
+  componentWillMount() {
+    console.log("will mount");
   }
 
   render() {
+    console.log("component rendering");
     return (
       <div>
-        <h1>It works, {this.props.user}{this.props.em}</h1>
-        <button onClick={this.increment.bind(this)}>Increment</button>
-        <h3>{this.state.count} times.</h3>
+        <button onClick={this.countOn.bind(this)}>Mount</button>
+        <br />
+        <br />
+        <button onClick={this.unmount.bind(this)}>Unmount</button>
+        <br />
+        <br />
+        <h2 ref="txt">Some text {this.state.number}</h2>
       </div>
     );
   }
-}
 
-App.propTypes = {
-  user: React.PropTypes.string.isRequired,
-  em: React.PropTypes.string
-}
+  componentDidMount() {
+    console.log("component mounted");
+  }
 
-App.defaultProps = {
-  em: "!"
 }
 
 ReactDOM.render(
-  <App user="Amr" em="!!!!!!" />,
+  <App />,
   document.getElementById('app')
 );
 
